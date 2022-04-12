@@ -132,13 +132,13 @@ class HBNBCommand(cmd.Cmd):
                         newobj[1] = newobj[1].replace('_', ' ')
                         # sett attrb passed
                         setattr(obj, newobj[0], newobj[1])
-        obj.save()
+            obj.save()
 
-        print("{}".format(obj.id))
-    except SyntaxError:
-        print("** class name missing **")
-    except NameError:
-        print("** class doesn't exist **")
+            print("{}".format(obj.id))
+        except SyntaxError:
+            print("** class name missing **")
+        except NameError:
+            print("** class qdoesn't exist **")
 
     def help_create(self):
         """ Help information for the create method """
