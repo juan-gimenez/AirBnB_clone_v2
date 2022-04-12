@@ -73,7 +73,7 @@ class HBNBCommand(cmd.Cmd):
                 pline = pline[2].strip()  # pline is now str
                 if pline:
                     # check for *args or **kwargs
-                    if pline[0] is '{' and pline[-1] is'}'\
+                    if pline[0] is '{' and pline[-1] is '}'\
                             and type(eval(pline)) is dict:
                         _args = pline
                     else:
@@ -112,36 +112,34 @@ class HBNBCommand(cmd.Cmd):
     def emptyline(self):
         """ Overrides the emptyline method of CMD """
         pass
-    
+
     def do_create(self, arg):
         """ Create updated """
-        tmplist = []
         types = [str, int, float]
-        lenght = len(objfinal)
+        tmplist = []
         try:
             if arg is None:
                 raise SyntaxError()
-            # tokenize 
             tmplist = arg.split(" ")
-            arguments = tmplist[1:]
+            param = tmplist[1:]
             obj = eval("{}()".format(tmplist[0]))
-            for args in arguments:
-                objfinal = arguments.split("=")
-                if lenght == 2:
-                    if type(objfinal[1]) in types:
-                        objfinal[1] = objfinal[1].replace('"', '')
-                        objfinal[1] = objfinal[1].replace('_', ' ')
-                        # set attributes to object
-                        # replaced _ for space
-                        # sett attr to obj name = value
-                        setattr(obj, objfinal[0], objfinal[1])
-            obj.save()
-            print("{}".format(obj.id))
-        except SyntaxError:
-                        print("** class name missing **")
-        except NameError:
-                        print("** class doesn't exist **")
-            
+            for parameter in param:
+                newobj = parameter.split("=")
+                if len(newobj) == 2:
+                    if type(newobj[1]) in types:
+                        newobj[1] = newobj[1].replace('"', '')
+                        # replace _ for space to set the attr
+                        newobj[1] = newobj[1].replace('_', ' ')
+                        # sett attrb passed
+                        setattr(obj, newobj[0], newobj[1])
+        obj.save()
+
+        print("{}".format(obj.id))
+    except SyntaxError:
+        print("** class name missing **")
+    except NameError:
+        print("** class doesn't exist **")
+
     def help_create(self):
         """ Help information for the create method """
         print("Creates a class of any type")
@@ -335,6 +333,7 @@ class HBNBCommand(cmd.Cmd):
         """ Help information for the update class """
         print("Updates an object with new information")
         print("Usage: update <className> <id> <attName> <attVal>\n")
+
 
 if __name__ == "__main__":
     HBNBCommand().cmdloop()
