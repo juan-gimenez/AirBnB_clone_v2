@@ -17,7 +17,7 @@ place_amenity = Table('place_amenity', Base.metadata,
 
 
 class Place(BaseModel, Base):
-    """ A place to stay """
+    """ Place class """
     __tablename__ = 'places'
     if getenv('HBNB_TYPE_STORAGE') == 'db':
         city_id = Column(String(60), ForeignKey('cities.id'), nullable=False)
@@ -61,7 +61,7 @@ class Place(BaseModel, Base):
     @amenities.setter
     def amenities(self, obj):
         """
-        perspective atrribute
+        amenities setter
         """
         if isinstance(obj, Amenity):
             if obj.id not in self.amenity_ids:
