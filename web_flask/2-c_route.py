@@ -24,7 +24,7 @@ def f(text):
     (replace underscore _ symbols with a space )
     """
     text_replace = text.replace("_", " ")
-    return "C {}".format(text_replace)C display
+    return "C {}".format(text_replace)
 
 
 if __name__ == "__main__":
