@@ -51,14 +51,17 @@ def displayhtml(n):
     return render_template('5-number.html', n=n)
 
 
-@app.route('/number_odd_or_even/<int:n>', srict_slashes=False)
-def odd_or_even(n):
-    '''even or odd'''
-    if (n % 2 != 0):
-        even = 'odd'
+@app.route("/number_odd_or_even/<int:n>", strict_slashes=False)
+def number_odd_or_even(n):
+    """
+    display a HTML page only if n is an integer:
+    H1 Number: n is even| inside the tag BODY
+    """
+    if n % 2 == 0:
+        num = 'even'
     else:
-        even = 'even'
-    return (render_template('6-number_odd_or_even.html', n=n, even=even))
+        num = 'odd'
+    return render_template("6-number_odd_or_even.html", n=n, num=num)
 
 
 if __name__ == "__main__":
